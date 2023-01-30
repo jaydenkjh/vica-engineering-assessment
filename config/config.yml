@@ -1,0 +1,6 @@
+#server
+server_port: 3000
+server_name: vica_engineering_assessment
+
+#Database
+MONGODB_URI: "mongodb://localhost:27017"

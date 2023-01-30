@@ -1,0 +1,25 @@
+{
+  "name": "vica-engineering-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaydenkjh/vica-engineering-assessment.git"
+  },
+  "author": "Jayden Ke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaydenkjh/vica-engineering-assessment/issues"
+  },
+  "homepage": "https://github.com/jaydenkjh/vica-engineering-assessment#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "local": "node index.js"
+  }
+}
