@@ -1,0 +1,14 @@
+{
+  "server": {
+    "port": 3000,
+    "name": "Vica Engineering Assessment"
+  },
+  "database": {
+    "mongodb_uri": "mongodb://127.0.0.1:27017",
+    "db_name": "vica",
+    "collections": ["users", "books", "borrow"]
+  },
+  "users": {
+    "valid_roles": ["User", "Admin", "Editor"]
+  }
+}
