@@ -102,7 +102,7 @@ class BookService {
             return res.status(400).json(response)
         }
 
-        const result = await self.parentController.model.books.UpdateBook(bookId, fields.title, fields.role, fields.genre, fields.author, fields.year_published, fields.borrow_status, fields.last_borrower)
+        const result = await self.parentController.model.books.UpdateBook(bookId, fields.title, fields.description, fields.genre, fields.author, fields.year_published, fields.borrow_status, fields.last_borrower)
 
         if (!result || result.matchedCount < 1) {
             const response = {success: false, code: errorCode.serverError, message: `Failed to update book`}
