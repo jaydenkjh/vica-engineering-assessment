@@ -6,22 +6,22 @@ let db = ""
 class BookModel {
     constructor(opts) {
         let self = this;
-        self.mongo = opts.mongo
-        self.config = opts.config
+        self.mongo = opts.mongo;
+        self.config = opts.config;
         db = self.config.get('database.db_name');
     }
 
     async GetAllBooks(limit, skip) {
         const self = this;
 
-        const options = {}
+        const options = {};
 
         if (limit) {
-            options.limit = parseInt(limit)
+            options.limit = parseInt(limit);
         }
 
         if (skip) {
-            options.skip = parseInt(skip)
+            options.skip = parseInt(skip);
         }
 
         const result = await self.mongo.find(db, bookCollection, null, options);
@@ -109,5 +109,4 @@ class BookModel {
         return result;
     }
 }
-
 module.exports = BookModel

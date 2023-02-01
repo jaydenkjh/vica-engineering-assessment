@@ -135,6 +135,7 @@ class UserRequestService {
                 console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`)
                 return res.status(400).json(response)
             }
+            return
         }
 
         // Database updated

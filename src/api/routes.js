@@ -24,7 +24,7 @@ module.exports = (app, controller) => {
         controller.service.users.GetAllUsers(req, res);
     })
 
-    app.get(`/${VERSION.v1}/${PATHS.user}/:user_id`, function (req, res) {
+    app.get(`/${VERSION.v1}/${PATHS.user}/:user_id`, AUTH(PERMISSION["3"]), function (req, res) {
         controller.service.users.GetUser(req, res);
     })
 
@@ -64,7 +64,7 @@ module.exports = (app, controller) => {
         controller.service.books.InsertBook(req, res);
     })
 
-    app.get(`/${VERSION.v1}/${PATHS.book}/:book_id`, function (req, res) {
+    app.get(`/${VERSION.v1}/${PATHS.book}/:book_id`, AUTH(PERMISSION["3"]), function (req, res) {
         controller.service.books.GetBook(req, res);
     })
 
@@ -72,10 +72,24 @@ module.exports = (app, controller) => {
         controller.service.books.UpdateBook(req, res);
     })
 
-    app.del(`/${VERSION.v1}/${PATHS.book}/:book_id`, AUTH(PERMISSION["2"]), function (req, res) {
+    app.delete(`/${VERSION.v1}/${PATHS.book}/:book_id`, AUTH(PERMISSION["2"]), function (req, res) {
         controller.service.books.DeleteBook(req, res);
     })
 
-
     /* Borrow Routes */
+    app.get(`/${VERSION.v1}/${PATHS.borrow}/all`, function (req, res) {
+        controller.service.borrow.GetAllBorrows(req, res);
+    })
+
+    app.get(`/${VERSION.v1}/${PATHS.borrow}/:borrow_id`, function (req, res) {
+        controller.service.borrow.GetBorrow(req, res);
+    })
+
+    app.patch(`/${VERSION.v1}/${PATHS.borrow}/:borrow_id`, AUTH(PERMISSION["3"]), function (req, res) {
+        controller.service.borrow.UpdateBorrow(req, res);
+    })
+
+    app.post(`/${VERSION.v1}/${PATHS.borrow}`, AUTH(PERMISSION["3"]), function (req, res) {
+        controller.service.borrow.InsertBorrow(req, res);
+    })
 }
