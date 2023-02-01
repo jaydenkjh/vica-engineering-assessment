@@ -61,7 +61,9 @@ able to make requests.
 All request should follow a common protocol and format. This request contains the HTTP method.
 
 ### Stateless
-Each request is indepentent of each other in the server
+Each request is independent of each other in the server. No information is stored between requests
+and each is unconnected.
+
 
 ## Code Implementation 
 ### Configuration and secret keys
