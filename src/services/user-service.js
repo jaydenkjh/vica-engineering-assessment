@@ -4,6 +4,7 @@ const AuthVerify = require('../services/auth-verify');
 const {PERMISSION} = require("../constants/permission");
 
 const auth = new AuthVerify();
+
 class UserService {
     constructor(parentController, opts) {
         let self = this;
@@ -25,21 +26,21 @@ class UserService {
         return res.status(200).json(response);
     }
 
-    async GetUser(req, res){
+    async GetUser(req, res) {
         let self = this;
 
         const userId = req.params.user_id;
 
-        if (!userId || userId=="") {
-            const response = {success:false, code: errorCode.missingParams, message: "missing user id"}
+        if (!userId || userId == "") {
+            const response = {success: false, code: errorCode.missingParams, message: "missing user id"}
             console.log(`[UserService :: GetUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
         const result = await self.parentController.model.users.GetUser(userId)
 
-        if (!result || result.length < 1){
-            const response = {success:false, code: errorCode.missingInDb, message: "User not found"}
+        if (!result || result.length < 1) {
+            const response = {success: false, code: errorCode.missingInDb, message: "User not found"}
             console.log(`[UserService :: GetUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
@@ -49,7 +50,7 @@ class UserService {
         return res.status(200).json(response);
     }
 
-    async InsertUser(req, res){
+    async InsertUser(req, res) {
         let self = this;
 
         const fields = req.body;
@@ -68,13 +69,13 @@ class UserService {
             return res.status(400).json(response)
         }
 
-        if (!validRoles.includes(fields.role)){
+        if (!validRoles.includes(fields.role)) {
             const response = {success: false, code: errorCode.invalidParams, message: `invalid user role ${validRoles}`}
             console.log(`[UserService :: InsertUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
-        if (!fields.approver){ // Send request
+        if (!fields.approver) { // Send request
             const result = await self.parentController.model.userRequest.InsertRequest(fields.userId, "Add", fields);
             const response = {success: true, data: result}
             console.log(`[UserService :: InsertUser] ${JSON.stringify(response)}`)
@@ -82,7 +83,7 @@ class UserService {
         }
 
         // Check approver auth
-        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])){
+        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])) {
             const response = {success: false, code: errorCode.serverError, message: `invalid approver`}
             console.log(`[UserService :: InsertUser] ${JSON.stringify(response)}`)
 
@@ -102,7 +103,7 @@ class UserService {
         return res.status(201).json(response)
     }
 
-    async UpdateUser(req, res){
+    async UpdateUser(req, res) {
         let self = this;
 
         const fields = req.body;
@@ -110,18 +111,22 @@ class UserService {
         const userId = fields.updateId || req.params.user_id;
 
         if (!userId) {
-            const response = {success:false, code: errorCode.missingParams, message: "missing user id"}
+            const response = {success: false, code: errorCode.missingParams, message: "missing user id"}
             console.log(`[UserService :: UpdateUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
-        if (!fields.name && !fields.role){
-            const response = {success: false, code: errorCode.missingParams, message: "either name or role field must exist"}
+        if (!fields.name && !fields.role) {
+            const response = {
+                success: false,
+                code: errorCode.missingParams,
+                message: "either name or role field must exist"
+            }
             console.log(`[UserService :: UpdateUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
-        if (!fields.approver){ // Send request
+        if (!fields.approver) { // Send request
             fields.updateId = userId;
             console.log(userId)
             const result = await self.parentController.model.userRequest.InsertRequest(fields.userId, "Update", fields);
@@ -131,7 +136,7 @@ class UserService {
         }
 
         // Check approver auth
-        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])){
+        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])) {
             const response = {success: false, code: errorCode.serverError, message: `invalid approver`}
             console.log(`[UserService :: InsertUser] ${JSON.stringify(response)}`)
 
@@ -160,7 +165,7 @@ class UserService {
         return res.status(200).json(response)
     }
 
-    async DeleteUser(req, res){
+    async DeleteUser(req, res) {
         const self = this;
 
         const fields = req.body;
@@ -168,12 +173,12 @@ class UserService {
         const userId = fields.updateId || req.params.user_id;
 
         if (!userId) {
-            const response = {success:false, code: errorCode.missingParams, message: "missing user id"}
+            const response = {success: false, code: errorCode.missingParams, message: "missing user id"}
             console.log(`[UserService :: UpdateUser] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
-        if (!fields.approver){ // Send request
+        if (!fields.approver) { // Send request
             fields.updateId = userId;
             const result = await self.parentController.model.userRequest.InsertRequest(fields.userId, "Remove", fields);
             const response = {success: true, data: result}
@@ -182,7 +187,7 @@ class UserService {
         }
 
         // Check approver auth
-        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])){
+        if (!auth.VerifyToken(fields.approver, PERMISSION["1"])) {
             const response = {success: false, code: errorCode.serverError, message: `invalid approver`}
             console.log(`[UserService :: InsertUser] ${JSON.stringify(response)}`)
 
@@ -207,9 +212,8 @@ class UserService {
 
         const response = {success: true, data: result};
         console.log(`[UserService :: DeleteUser] ${JSON.stringify(response)}`)
-        return res.status(200).json(response)
+        return res.status(201).json(response)
     }
-
 }
 
 module.exports = UserService

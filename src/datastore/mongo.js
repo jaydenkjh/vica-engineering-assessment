@@ -16,19 +16,19 @@ class Mongo {
 
     }
 
-    async init(){
+    async init() {
         let self = this;
 
         await self.mongoClient.connect();
 
         const collections = self.config.get("database.collections");
 
-        if (!Array.isArray(collections)){
+        if (!Array.isArray(collections)) {
             throw new Error("Invalid collection config")
         }
 
         collections.forEach((collection) => {
-             self.mongoClient.db(self.dbName).createCollection(collection, function(err, res) {
+            self.mongoClient.db(self.dbName).createCollection(collection, function (err, res) {
                 if (!err) {
                     console.log(`Collection ${collection} created`);
                 }
@@ -37,16 +37,16 @@ class Mongo {
 
     }
 
-    find(database, collection, query, options){
+    find(database, collection, query, options) {
         const self = this;
 
         const coll = self.getCollection(database, collection);
-        const findResult =  coll.find(query, options).toArray();
+        const findResult = coll.find(query, options).toArray();
 
         return findResult;
     }
 
-    insert(database, collection, query, options){
+    insert(database, collection, query, options) {
         let self = this;
 
         const coll = self.getCollection(database, collection);
@@ -70,7 +70,7 @@ class Mongo {
         return result;
     }
 
-    async delete(database, collection, query, options){
+    async delete(database, collection, query, options) {
         let self = this;
 
         const coll = self.getCollection(database, collection);

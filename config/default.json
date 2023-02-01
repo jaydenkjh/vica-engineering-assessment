@@ -6,9 +6,18 @@
   "database": {
     "mongodb_uri": "mongodb://127.0.0.1:27017",
     "db_name": "vica",
-    "collections": ["users", "books", "borrow", "user-requests"]
+    "collections": [
+      "users",
+      "books",
+      "borrow",
+      "user-requests"
+    ]
   },
   "users": {
-    "valid_roles": ["User", "Admin", "Editor"]
+    "valid_roles": [
+      "User",
+      "Admin",
+      "Editor"
+    ]
   }
 }

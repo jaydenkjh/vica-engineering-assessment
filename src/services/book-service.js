@@ -92,7 +92,7 @@ class BookService {
             return res.status(400).json(response)
         }
 
-        if (fields.borrow_status && fields.borrow_status != "Borrowed" && fields.borrow_status != "Available"){
+        if (fields.borrow_status && fields.borrow_status != "Borrowed" && fields.borrow_status != "Available") {
             const response = {
                 success: false,
                 code: errorCode.invalidParams,

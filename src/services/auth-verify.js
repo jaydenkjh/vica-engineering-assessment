@@ -15,15 +15,17 @@ class AuthVerify {
             return false;
         }
 
-        if (!Array.isArray(permission)){
+        if (!Array.isArray(permission)) {
             return false;
         }
 
-        if (!authCredentials || !authCredentials.role || !permission.includes(authCredentials.role)){
+        if (!authCredentials || !authCredentials.role || !permission.includes(authCredentials.role)) {
             return false;
         }
 
         return true;
     }
 
-} module.exports = AuthVerify;
+}
+
+module.exports = AuthVerify;

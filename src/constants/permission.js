@@ -1,6 +1,6 @@
 module.exports = {
     // Define allowed roles for access
-    PERMISSION : {
+    PERMISSION: {
         1: ["Admin"],
         2: ["Admin", "Editor"]
     }

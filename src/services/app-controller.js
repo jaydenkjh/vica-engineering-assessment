@@ -5,7 +5,7 @@ const
 
     userModel = require('../models/user-model'),
     userRequestModel = require('../models/user-request-model'),
-bookModel = require('../models/book-model')
+    bookModel = require('../models/book-model')
 
 class Controller {
     constructor(opts) {

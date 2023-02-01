@@ -28,9 +28,9 @@ try {
 
 // middleware to read body, parse it and place results in req.body
 app.use(express.json());             // for application/json
-app.use(express.urlencoded({ extended: true }))       // for application/x-www-form-urlencoded
+app.use(express.urlencoded({extended: true}))       // for application/x-www-form-urlencoded
 
-const controller = new appController({mongo: mongoDb, config: config })
+const controller = new appController({mongo: mongoDb, config: config})
 
 // Initialise routes
 routes(app, controller)

@@ -2,6 +2,7 @@ const userCollection = "users"
 const uuid = require("uuid")
 
 let db = ""
+
 class UserModel {
     constructor(opts) {
         let self = this;
@@ -10,16 +11,16 @@ class UserModel {
         db = self.config.get('database.db_name');
     }
 
-    async GetAllUsers(limit, skip){
+    async GetAllUsers(limit, skip) {
         const self = this;
 
         const options = {}
 
-        if (limit){
+        if (limit) {
             options.limit = parseInt(limit)
         }
 
-        if (skip){
+        if (skip) {
             options.skip = parseInt(skip)
         }
 
@@ -28,7 +29,7 @@ class UserModel {
         return result;
     }
 
-    async GetUser(userId){
+    async GetUser(userId) {
         const self = this;
 
         const query = {userId: userId};
@@ -38,7 +39,7 @@ class UserModel {
         return result;
     }
 
-    async InsertUser(name, role){
+    async InsertUser(name, role) {
         const self = this;
         const dateJoined = Date.now(); // timestamp
         const userId = uuid.v4(); // generate unique id
@@ -52,12 +53,12 @@ class UserModel {
         return result;
     }
 
-    async UpdateUser(userId, name, role){
+    async UpdateUser(userId, name, role) {
         const self = this;
 
         const options = {};
 
-        if (name){
+        if (name) {
             options.name = name;
         }
 
@@ -84,4 +85,5 @@ class UserModel {
 
     }
 }
+
 module.exports = UserModel

@@ -1,14 +1,14 @@
 const errorCode = require("../constants/error_codes");
 
 class UserRequestService {
-    constructor(parentController, opts){
+    constructor(parentController, opts) {
         let self = this;
 
         self.parentController = parentController;
         self.config = opts.config;
     }
 
-    async GetAllRequests(req, res){
+    async GetAllRequests(req, res) {
         let self = this;
 
         const status = req.query.status;
@@ -22,14 +22,14 @@ class UserRequestService {
         return res.status(200).json(response);
     }
 
-    async GetRequest(req, res){
+    async GetRequest(req, res) {
         let self = this;
 
         const requestId = req.params.request_id;
 
         const result = await self.parentController.model.userRequest.GetRequest(requestId);
-        if (!result || result.length < 1){
-            const response = {success:false, code: errorCode.missingInDb, message: "User request not found"}
+        if (!result || result.length < 1) {
+            const response = {success: false, code: errorCode.missingInDb, message: "User request not found"}
             console.log(`[UserRequestService :: GetRequest] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
@@ -38,12 +38,13 @@ class UserRequestService {
         console.log(`[UserRequestService :: GetRequest] ${JSON.stringify(response)}`)
         return res.status(200).json(response);
     }
-    async InsertRequest(req, res){
+
+    async InsertRequest(req, res) {
         let self = this;
 
         const fields = req.body;
 
-        if (!fields.requestType || !fields.payload || !fields.userId){
+        if (!fields.requestType || !fields.payload || !fields.userId) {
             const response = {success: false, code: errorCode.missingParams, message: "missing type / payload"}
             console.log(`[UserRequestService :: InsertRequest] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
@@ -55,7 +56,7 @@ class UserRequestService {
         return res.status(201).json(response);
     }
 
-    async UpdateRequest(req, res){
+    async UpdateRequest(req, res) {
         let self = this;
 
         const requestId = req.params.request_id;
@@ -64,13 +65,13 @@ class UserRequestService {
 
         const status = fields.status;
 
-        if (!requestId || !status){
+        if (!requestId || !status) {
             const response = {success: false, code: errorCode.missingParams, message: "missing requestId / status"};
             console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`);
             return res.status(400).json(response);
         }
 
-        if (status != "Approved" && status != "Rejected" && status != "COMPLETED"){
+        if (status != "Approved" && status != "Rejected" && status != "COMPLETED") {
             const response = {success: false, code: errorCode.invalidParams, message: "Invalid status"};
             console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`);
             return res.status(400).json(response);
@@ -84,14 +85,18 @@ class UserRequestService {
             return res.status(400).json(response);
         }
 
-        if (!record[0].payload || !record[0].requestType || !record[0].requestorId || !record[0].status){
+        if (!record[0].payload || !record[0].requestType || !record[0].requestorId || !record[0].status) {
             const response = {success: false, code: errorCode.serverError, message: `Error in request record`}
             console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
 
         if (record[0].status != "Pending") {
-            const response = {success: false, code: errorCode.serverError, message: `Record has already been processed.`}
+            const response = {
+                success: false,
+                code: errorCode.serverError,
+                message: `Record has already been processed.`
+            }
             console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`)
             return res.status(400).json(response)
         }
@@ -108,7 +113,7 @@ class UserRequestService {
         if (status == "Approved") { // process request
             let body = record[0].payload
 
-            if (record[0].requestorId == fields.userId){
+            if (record[0].requestorId == fields.userId) {
                 const response = {success: false, code: errorCode.serverError, message: `Unable to approve own request`}
                 console.log(`[UserRequestService :: UpdateRequest] ${JSON.stringify(response)}`)
                 return res.status(400).json(response)
@@ -138,4 +143,5 @@ class UserRequestService {
         return res.status(201).json(response);
     }
 }
+
 module.exports = UserRequestService
