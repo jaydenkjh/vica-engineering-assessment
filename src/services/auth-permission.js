@@ -13,7 +13,14 @@ module.exports = (permission) => {
 
         const cert = process.env.TOKEN
 
-        const authCredentials = jwt.verify(authToken, cert)
+        let authCredentials = null
+        try {
+            authCredentials = jwt.verify(authToken, cert)
+        } catch {
+            const response = {success: false, code: errorCode.unauthorized, message: "User not authorized"}
+            console.log(JSON.stringify(response))
+            return res.status(401).json(response)
+        }
 
         if (!Array.isArray(permission)){
             const response = {success: false, code: errorCode.serverError, message: "Permission setting issue"}
@@ -27,7 +34,7 @@ module.exports = (permission) => {
             return res.status(401).json(response)
         }
 
-
+        req.body.userId = authCredentials.userId;
 
         next();
     }
