@@ -50,7 +50,13 @@
 					"name": "Get user by id",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiVXNlciJ9.Egyovjx5rmf_qkBapxu3_wssnvXqFwK3v8rGpX9eQg8",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{vica_host}}/v1/user/{{user_id}}",
 							"host": [
@@ -148,7 +154,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Bobby Tan 8\",\r\n    \"role\": \"Admin\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Bobby Tan 9\",\r\n    \"role\": \"Editor\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,7 +553,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Some book 2\",\r\n    \"description\": \"this is some book 222222\",\r\n    \"genre\": \"Horror 5\",\r\n    \"author\": \"Book man 6\",\r\n    \"year_published\": \"1987\",\r\n    \"borrow_status\": \"Borrowed\",\r\n    \"last_borrower\": \"\"\r\n}",
+							"raw": "{\r\n    \"title\": \"I love books\",\r\n    \"description\": \"this is some book 22222222\",\r\n    \"genre\": \"Horror 5\",\r\n    \"author\": \"Book man 6\",\r\n    \"year_published\": \"1987\",\r\n    \"borrow_status\": \"\",\r\n    \"last_borrower\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -660,7 +666,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Borrow",
+					"name": "Update Borrow (Return book)",
 					"request": {
 						"method": "PATCH",
 						"header": [
