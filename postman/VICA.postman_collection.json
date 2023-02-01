@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "5ef4bc9b-b9a2-47f8-83ef-8bd459ca2041",
+		"name": "VICA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9263010"
+	},
+	"item": [
+		{
+			"name": "User routes",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNWIiLCJyb2xlIjoiQWRtaW4ifQ.2T5dgW0My9WsZY7L7yIaDstQum1crcTRFQ7OyGkL1GY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/user/all",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"all"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{vica_host}}/v1/user/{{user_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    postman.setEnvironmentVariable(\"request_id\", jsonData.data.requestId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNWIiLCJyb2xlIjoiQWRtaW4ifQ.2T5dgW0My9WsZY7L7yIaDstQum1crcTRFQ7OyGkL1GY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bobby Tan\",\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/user",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    postman.setEnvironmentVariable(\"request_id\", jsonData.data.requestId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNWIiLCJyb2xlIjoiQWRtaW4ifQ.2T5dgW0My9WsZY7L7yIaDstQum1crcTRFQ7OyGkL1GY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bobby Tan 8\",\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/user/{{user_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    postman.setEnvironmentVariable(\"user_id\", jsonData.data.userId);\r",
+									"    postman.setEnvironmentVariable(\"request_id\", jsonData.data.requestId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNWIiLCJyb2xlIjoiQWRtaW4ifQ.2T5dgW0My9WsZY7L7yIaDstQum1crcTRFQ7OyGkL1GY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/user/{{user_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Request Routes",
+			"item": [
+				{
+					"name": "Get all user request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNWIiLCJyb2xlIjoiQWRtaW4ifQ.2T5dgW0My9WsZY7L7yIaDstQum1crcTRFQ7OyGkL1GY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/user-request/all",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user-request",
+								"all"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Pending",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Rejected",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Completed",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Failed",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Request by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNSIsInJvbGUiOiJBZG1pbiJ9.KDWd6LcoRt67P4wsxiUrECTuR0cCt3WA6k7_KiM5MU8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bobby Tan 7\",\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/user-request/{{request_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user-request",
+								"{{request_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve User Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    if (jsonData.data.userId)\r",
+									"    postman.setEnvironmentVariable(\"user_id\", jsonData.data.userId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNSIsInJvbGUiOiJBZG1pbiJ9.KDWd6LcoRt67P4wsxiUrECTuR0cCt3WA6k7_KiM5MU8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Approved\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/user-request/{{request_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user-request",
+								"{{request_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject User Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    if (jsonData.data.userId)\r",
+									"    postman.setEnvironmentVariable(\"user_id\", jsonData.data.userId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkN2EyZDBjYi0yYTRmLTQ5YTQtYTU2Yy03YzViZTAyNWZkNSIsInJvbGUiOiJBZG1pbiJ9.KDWd6LcoRt67P4wsxiUrECTuR0cCt3WA6k7_KiM5MU8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Rejected\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/user-request/{{request_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"user-request",
+								"{{request_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Routes",
+			"item": [
+				{
+					"name": "Get all books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiRWRpdG9yIn0.IdRfWVOidSFBrfO9KlgcAKxOHiUsYf6D4Vh_mk01qmc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/book/all",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"book",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get book by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiRWRpdG9yIn0.IdRfWVOidSFBrfO9KlgcAKxOHiUsYf6D4Vh_mk01qmc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/book/{{book_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"book",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    if (jsonData.data.bookId)\r",
+									"    postman.setEnvironmentVariable(\"book_id\", jsonData.data.bookId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiRWRpdG9yIn0.IdRfWVOidSFBrfO9KlgcAKxOHiUsYf6D4Vh_mk01qmc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Some book\",\r\n    \"description\": \"this is some book\",\r\n    \"genre\": \"Horror\",\r\n    \"author\": \"Book man\",\r\n    \"year_published\": \"1987\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/book",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiRWRpdG9yIn0.IdRfWVOidSFBrfO9KlgcAKxOHiUsYf6D4Vh_mk01qmc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/book/{{book_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"book",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update book",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiRWRpdG9yIn0.IdRfWVOidSFBrfO9KlgcAKxOHiUsYf6D4Vh_mk01qmc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Some book 2\",\r\n    \"description\": \"this is some book 222222\",\r\n    \"genre\": \"Horror 5\",\r\n    \"author\": \"Book man 6\",\r\n    \"year_published\": \"1987\",\r\n    \"borrow_status\": \"Borrowed\",\r\n    \"last_borrower\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/book/{{book_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"book",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Borrow Routes",
+			"item": [
+				{
+					"name": "Get all Borrows",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{vica_host}}/v1/borrow/all",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"borrow",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get borrow by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{vica_host}}/v1/borrow/{{borrow_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"borrow",
+								"{{borrow_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Borrow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.success){\r",
+									"    if (jsonData.data.borrowId)\r",
+									"    postman.setEnvironmentVariable(\"borrow_id\", jsonData.data.borrowId);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiVXNlciJ9.Egyovjx5rmf_qkBapxu3_wssnvXqFwK3v8rGpX9eQg8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookId\": \"{{book_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vica_host}}/v1/borrow",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"borrow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Borrow",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzllYTM4My04ODJlLTQwMWEtYTQ3MC0xMWExMzY1YzU1NjMiLCJyb2xlIjoiVXNlciJ9.Egyovjx5rmf_qkBapxu3_wssnvXqFwK3v8rGpX9eQg8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{vica_host}}/v1/borrow/{{borrow_id}}",
+							"host": [
+								"{{vica_host}}"
+							],
+							"path": [
+								"v1",
+								"borrow",
+								"{{borrow_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

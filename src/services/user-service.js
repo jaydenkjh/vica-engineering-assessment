@@ -47,7 +47,6 @@ class UserService {
         const response = {success: true, data: result[0]};
         console.log(`[UserService :: GetUser] ${JSON.stringify(response)}`);
         return res.status(200).json(response);
-        ;
     }
 
     async InsertUser(req, res) {
