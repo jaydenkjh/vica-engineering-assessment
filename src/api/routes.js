@@ -56,6 +56,26 @@ module.exports = (app, controller) => {
 
     /* Book routes */
 
+    app.get(`/${VERSION.v1}/${PATHS.book}/all`, function(req, res) {
+        controller.service.books.GetAllBooks(req, res);
+    })
+
+    app.post(`/${VERSION.v1}/${PATHS.book}`, AUTH(PERMISSION["2"]), function(req, res) {
+        controller.service.books.InsertBook(req, res);
+    })
+
+    app.get(`/${VERSION.v1}/${PATHS.book}/:book_id`, function(req, res) {
+        controller.service.books.GetBook(req, res);
+    })
+
+    app.patch(`/${VERSION.v1}/${PATHS.book}/:book_id`, AUTH(PERMISSION["2"]), function(req, res) {
+        controller.service.books.UpdateBook(req, res);
+    })
+
+    app.del(`/${VERSION.v1}/${PATHS.book}/:book_id`, AUTH(PERMISSION["2"]), function(req, res) {
+        controller.service.books.DeleteBook(req, res);
+    })
+
 
 
     /* Borrow Routes */
